@@ -32,6 +32,10 @@ import java.lang.annotation.Target;
  * 
  * @author jhouse
  */
+
+/**
+ * 同一时间将只有一个Job实例被执行。
+ */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

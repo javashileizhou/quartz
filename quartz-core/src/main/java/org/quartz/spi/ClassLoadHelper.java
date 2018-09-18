@@ -21,8 +21,8 @@ import java.net.URL;
 import java.io.InputStream;
 
 /**
- * An interface for classes wishing to provide the service of loading classes
- * and resources within the scheduler...
+ * 希望提供装载类服务的类的接口
+ * 和调度程序中的资源…
  * 
  * @author jhouse
  * @author pl47ypus

@@ -44,47 +44,28 @@ public interface JobListener {
      */
 
     /**
-     * <p>
-     * Get the name of the <code>JobListener</code>.
-     * </p>
+     * 获取监听器名称
      */
     String getName();
 
     /**
-     * <p>
-     * Called by the <code>{@link Scheduler}</code> when a <code>{@link org.quartz.JobDetail}</code>
-     * is about to be executed (an associated <code>{@link Trigger}</code>
-     * has occurred).
-     * </p>
-     * 
-     * <p>
-     * This method will not be invoked if the execution of the Job was vetoed
-     * by a <code>{@link TriggerListener}</code>.
-     * </p>
-     * 
-     * @see #jobExecutionVetoed(JobExecutionContext)
+     * （1）
+     * 任务执行之前执行
      */
     void jobToBeExecuted(JobExecutionContext context);
 
-    /**
-     * <p>
-     * Called by the <code>{@link Scheduler}</code> when a <code>{@link org.quartz.JobDetail}</code>
-     * was about to be executed (an associated <code>{@link Trigger}</code>
-     * has occurred), but a <code>{@link TriggerListener}</code> vetoed it's 
-     * execution.
-     * </p>
-     * 
-     * @see #jobToBeExecuted(JobExecutionContext)
-     */
+
+     /**
+      * (2)
+      * 这个方法正常情况下不执行,但是如果当TriggerListener中的vetoJobExecution方法返回true时,那么执行这个方法.
+      * 需要注意的是 如果方法(2)执行 那么(1),(3)这个俩个方法不会执行,因为任务被终止了嘛.
+      */
     void jobExecutionVetoed(JobExecutionContext context);
 
-    
+
     /**
-     * <p>
-     * Called by the <code>{@link Scheduler}</code> after a <code>{@link org.quartz.JobDetail}</code>
-     * has been executed, and be for the associated <code>Trigger</code>'s
-     * <code>triggered(xx)</code> method has been called.
-     * </p>
+     * (3)
+     * 任务执行完成后执行,jobException如果它不为空则说明任务在执行过程中出现了异常
      */
     void jobWasExecuted(JobExecutionContext context,
             JobExecutionException jobException);

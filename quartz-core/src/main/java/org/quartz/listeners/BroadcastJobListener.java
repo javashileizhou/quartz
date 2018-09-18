@@ -24,20 +24,7 @@ import org.quartz.JobExecutionException;
 import org.quartz.JobListener;
 
 /**
- * Holds a List of references to JobListener instances and broadcasts all
- * events to them (in order).
- *
- * <p>The broadcasting behavior of this listener to delegate listeners may be
- * more convenient than registering all of the listeners directly with the
- * Scheduler, and provides the flexibility of easily changing which listeners
- * get notified.</p>
- *
- *
- * @see #addListener(org.quartz.JobListener)
- * @see #removeListener(org.quartz.JobListener)
- * @see #removeListener(String)
- *
- * @author James House (jhouse AT revolition DOT net)
+ * 监听器集合
  */
 public class BroadcastJobListener implements JobListener {
 

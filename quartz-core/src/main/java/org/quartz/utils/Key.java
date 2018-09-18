@@ -110,8 +110,10 @@ public class Key<T>  implements Serializable, Comparable<Key<T>> {
         return getGroup() + '.' + getName();
     }
 
+
     @Override
     public int hashCode() {
+        //这里为什么设计为31，个人猜想是左移位5位
         final int prime = 31;
         int result = 1;
         result = prime * result + ((group == null) ? 0 : group.hashCode());
@@ -142,6 +144,7 @@ public class Key<T>  implements Serializable, Comparable<Key<T>> {
         return true;
     }
 
+    @Override
     public int compareTo(Key<T> o) {
         
         if(group.equals(DEFAULT_GROUP) && !o.group.equals(DEFAULT_GROUP))

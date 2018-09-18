@@ -534,7 +534,7 @@ public class QuartzScheduler implements RemotableQuartzScheduler {
         // right after entering start()
         notifySchedulerListenersStarting();
 
-        if (initialStart == null) {
+        if (initialStart == null) { //初始化标识为null，进行初始化操作
             initialStart = new Date();
             this.resources.getJobStore().schedulerStarted();            
             startPlugins();
@@ -542,12 +542,12 @@ public class QuartzScheduler implements RemotableQuartzScheduler {
             resources.getJobStore().schedulerResumed();
         }
 
-        schedThread.togglePause(false);
+        schedThread.togglePause(false);//设置 不暂停
 
         getLog().info(
                 "Scheduler " + resources.getUniqueIdentifier() + " started.");
         
-        notifySchedulerListenersStarted();
+        notifySchedulerListenersStarted();//提醒调度器的监听启动
     }
 
     public void startDelayed(final int seconds) throws SchedulerException

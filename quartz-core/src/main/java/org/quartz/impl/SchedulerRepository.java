@@ -25,11 +25,14 @@ import org.quartz.SchedulerException;
 
 /**
  * <p>
- * Holds references to Scheduler instances - ensuring uniqueness, and
- * preventing garbage collection, and allowing 'global' lookups - all within a
- * ClassLoader space.
+ * 保持对调度器实例的引用-确保唯一性，以及
+ * 防止垃圾收集，并允许“全球”查找-所有在一个
+ * 类加载器空间。
  * </p>
- * 
+ *
+ * <person>
+ *   调度程序库，采用单例模式存储任务调度Schedule
+ * </person>
  * @author James House
  */
 public class SchedulerRepository {

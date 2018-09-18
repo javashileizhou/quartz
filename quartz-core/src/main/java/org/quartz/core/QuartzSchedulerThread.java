@@ -259,7 +259,7 @@ public class QuartzSchedulerThread extends Thread {
                         break;
                     }
                 }
-
+                //获取可用线程数 qsRsrcs是QuartzSchedulerResources对象
                 int availThreadCount = qsRsrcs.getThreadPool().blockForAvailableThreads();
                 if(availThreadCount > 0) { // will always be true, due to semantics of blockForAvailableThreads...
 

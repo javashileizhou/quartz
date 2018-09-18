@@ -25,19 +25,7 @@ import java.io.InputStream;
 import org.quartz.spi.ClassLoadHelper;
 
 /**
- * A <code>ClassLoadHelper</code> uses all of the <code>ClassLoadHelper</code>
- * types that are found in this package in its attempts to load a class, when
- * one scheme is found to work, it is promoted to the scheme that will be used
- * first the next time a class is loaded (in order to improve performance).
- * 
- * <p>
- * This approach is used because of the wide variance in class loader behavior
- * between the various environments in which Quartz runs (e.g. disparate 
- * application servers, stand-alone, mobile devices, etc.).  Because of this
- * disparity, Quartz ran into difficulty with a one class-load style fits-all 
- * design.  Thus, this class loader finds the approach that works, then 
- * 'remembers' it.  
- * </p>
+ * 级联类加载类，包含以下类加载器
  * 
  * @see org.quartz.spi.ClassLoadHelper
  * @see org.quartz.simpl.LoadingLoaderClassLoadHelper

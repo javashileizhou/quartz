@@ -687,7 +687,7 @@ public abstract class JobStoreSupport implements JobStore, Constants {
             clusterManagementThread.initialize();
         } else {
             try {
-                recoverJobs();
+                recoverJobs();//恢复job
             } catch (SchedulerException se) {
                 throw new SchedulerConfigException(
                         "Failure occured during job recovery.", se);
@@ -830,12 +830,13 @@ public abstract class JobStoreSupport implements JobStore, Constants {
      * 
      * @throws JobPersistenceException if jobs could not be recovered
      */
+    //recoverJobs -----  将恢复任何失败或misfire的作业，并根据需要清理数据存储。
     protected void recoverJobs() throws JobPersistenceException {
         executeInNonManagedTXLock(
             LOCK_TRIGGER_ACCESS,
             new VoidTransactionCallback() {
                 public void executeVoid(Connection conn) throws JobPersistenceException {
-                    recoverJobs(conn);
+                    recoverJobs(conn);//恢复Job
                 }
             }, null);
     }
@@ -3150,7 +3151,7 @@ public abstract class JobStoreSupport implements JobStore, Constants {
                     }
 
                     delegate = delegateClass.newInstance();
-                    
+                    //代理初始化
                     delegate.initialize(getLog(), tablePrefix, instanceName, instanceId, getClassLoadHelper(), canUseProperties(), getDriverDelegateInitString());
                     
                 } catch (InstantiationException e) {
@@ -3771,14 +3772,21 @@ public abstract class JobStoreSupport implements JobStore, Constants {
         }
         throw new IllegalStateException("JobStore is shutdown - aborting retry");
     }
-    
+
     /**
-     * Execute the given callback having optionally acquired the given lock.
-     * This uses the non-managed transaction connection.
-     * 
-     * @param lockName The name of the lock to acquire, for example
-     * "TRIGGER_ACCESS".  If null, then no lock is acquired, but the
-     * lockCallback is still executed in a non-managed transaction. 
+
+     *执行给定的回调，可选地获取给定的锁。
+
+     *使用非托管事务连接。
+
+     *
+
+     *@ PARAM LoCKNAME，获取的锁的名称，例如
+
+     *“TrutGryAccess”。如果为NULL，则不获取锁，但
+
+     *在非托管事务中仍然执行锁CALLBACK。
+
      */
     protected <T> T executeInNonManagedTXLock(
             String lockName, 

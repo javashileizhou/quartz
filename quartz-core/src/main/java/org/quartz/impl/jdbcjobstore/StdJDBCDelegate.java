@@ -137,6 +137,7 @@ public class StdJDBCDelegate implements DriverDelegate, StdJDBCConstants {
         this.instanceId = instanceId;
         this.useProperties = useProperties;
         this.classLoadHelper = classLoadHelper;
+        //添加默认触发器代理
         addDefaultTriggerPersistenceDelegates();
 
         if(initString == null)
